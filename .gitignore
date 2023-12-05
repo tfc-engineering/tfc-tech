@@ -1,0 +1,8 @@
+scratch/
+.idea/
+cmake-build-debug/
+cmake-build/
+bin/
+lib/
+tests/bin/
+Makefile

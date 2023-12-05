@@ -1,0 +1,10 @@
+if (NOT DEFINED LUA_ROOT)
+    if (NOT (DEFINED ENV{LUA_ROOT}))
+        message(FATAL_ERROR "***** LUA_ROOT is not set *****")
+    else()
+        set(LUA_ROOT "$ENV{LUA_ROOT}")
+    endif()
+endif()
+message(STATUS "LUA_ROOT set to ${LUA_ROOT}")
+
+file(APPEND "${CONFIG_FILE_NAME}" "set(LUA_ROOT ${LUA_ROOT})\n")
