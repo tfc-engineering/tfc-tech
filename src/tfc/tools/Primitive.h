@@ -62,6 +62,9 @@ public:
     return *this;
   }
 
+  /**Makes a primitive value from a string.*/
+  static Primitive makeFromString(const std::string& input);
+
   PrimitiveType type() const;
 
   /**Returns values of type bool if able.*/

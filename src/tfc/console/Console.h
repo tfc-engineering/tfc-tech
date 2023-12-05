@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 
-#define RegisterLuaCFunction(function, namespace_name, func_name)              \
+#define registerLuaCFunction(function, namespace_name, func_name)              \
   static char JoinWords(unique_var_name_luacfunc_##func_name##_,               \
                         __COUNTER__) =                                         \
     tfc::Console::addLuaCFunctionToRegistry(                                   \

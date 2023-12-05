@@ -17,7 +17,7 @@ namespace tfc
 {
 
 int test_Primitive(lua_State* L);
-RegisterLuaCFunction(/*function*/ test_Primitive,
+registerLuaCFunction(/*function*/ test_Primitive,
                      /*namespace*/ tfc,
                      /*function_name_in_lua*/ test_Primitive);
 

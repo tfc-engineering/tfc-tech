@@ -59,8 +59,8 @@ void Console::loadRegisteredItems()
   //=================================== Registering functions
   for (const auto& [full_name, function_ptr] : lua_c_function_registry_)
   {
-    const std::string function_name = StringUpToFirstReverse(full_name, ":");
-    const auto namespace_names = StringSplit(full_name, "::");
+    const std::string function_name = stringUpToFirstReverse(full_name, ":");
+    const auto namespace_names = stringSplit(full_name, "::");
 
     fleshOutLuaTableStructure(namespace_names,
                               /*pop_last=*/namespace_names.size() > 1);

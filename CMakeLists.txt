@@ -64,14 +64,13 @@ target_link_libraries(TFCTech TFClib)
 
 target_compile_options(TFCTech_test PUBLIC ${TFC_CXX_FLAGS})
 target_link_options(TFCTech_test PUBLIC ${MPI_CXX_LINK_FLAGS})
-target_link_libraries(TFCTech_test TFClib)
-# if(UNIX AND NOT APPLE)
-#     target_link_libraries(${TARGET} -Wl,--whole-archive ChiLib -Wl,--no-whole-archive )
-#     target_link_libraries(${TARGET}_test -Wl,--whole-archive ChiLib -Wl,--no-whole-archive )
-# elseif(APPLE)
-#     target_link_libraries(${TARGET} -Wl,-all_load ChiLib )
-#     target_link_libraries(${TARGET}_test -Wl,-all_load ChiLib )
-# endif()
+ if(UNIX AND NOT APPLE)
+     target_link_libraries(TFCTech -Wl,--whole-archive TFClib -Wl,--no-whole-archive )
+     target_link_libraries(TFCTech_test -Wl,--whole-archive TFClib -Wl,--no-whole-archive )
+ elseif(APPLE)
+     target_link_libraries(TFCTech -Wl,-all_load TFClib )
+     target_link_libraries(TFCTech_test -Wl,-all_load TFClib )
+ endif()
 
 set_target_properties(TFCTech_test
         PROPERTIES

@@ -4,27 +4,27 @@ namespace tfc
 {
 
 // #################################################################
-std::string StringLTrim(const std::string& s)
+std::string stringLTrim(const std::string& s)
 {
   size_t start = s.find_first_not_of(WHITESPACE);
   return (start == std::string::npos) ? "" : s.substr(start);
 }
 
 // #################################################################
-std::string StringRTrim(const std::string& s)
+std::string stringRTrim(const std::string& s)
 {
   size_t end = s.find_last_not_of(WHITESPACE);
   return (end == std::string::npos) ? "" : s.substr(0, end + 1);
 }
 
 // #################################################################
-std::string StringTrim(const std::string& s)
+std::string stringTrim(const std::string& s)
 {
-  return StringRTrim(StringLTrim(s));
+  return stringRTrim(stringLTrim(s));
 }
 
 // #################################################################
-std::vector<std::string> StringSplit(const std::string& input,
+std::vector<std::string> stringSplit(const std::string& input,
                                      const std::string& delim /*=" "*/)
 {
   constexpr size_t NPOS = std::string::npos;
@@ -46,7 +46,7 @@ std::vector<std::string> StringSplit(const std::string& input,
 }
 
 // #################################################################
-std::string StringUpToFirstReverse(const std::string& input,
+std::string stringUpToFirstReverse(const std::string& input,
                                    const std::string& search_string)
 {
   constexpr size_t NPOS = std::string::npos;
@@ -56,6 +56,52 @@ std::string StringUpToFirstReverse(const std::string& input,
     output = input.substr(last_scope + search_string.size(), NPOS);
 
   return output;
+}
+
+// ##################################################################
+bool stringIsBoolean(const std::string& input)
+{
+  return input == "true" or input == "false";
+}
+
+// ##################################################################
+bool stringIsNumber(const std::string& input)
+{
+  if (input.empty()) return false;
+  try {
+    const double val = std::stod(input);
+  }
+  catch (const std::exception& e)
+  {
+    return false;
+  }
+  return true;
+}
+
+bool stringIsInteger(const std::string& input)
+{
+  if (input.empty()) return false;
+
+  if (not stringIsNumber(input))
+    return false;
+
+  if (input.find_first_of("eE.") != std::string::npos)
+    return false;
+
+  return true;
+}
+
+bool stringIsFloat(const std::string& input)
+{
+  if (input.empty()) return false;
+
+  if (not stringIsNumber(input))
+    return false;
+
+  if (input.find_first_of("eE.") == std::string::npos)
+    return false;
+
+  return true;
 }
 
 } // namespace tfc

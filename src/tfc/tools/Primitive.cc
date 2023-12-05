@@ -1,6 +1,7 @@
 #include "Primitive.h"
 
 #include "tfc/runtime.h"
+#include "tfc/tools/string_utils.h"
 
 #define NullError() TFCLogicalError("Routine not defined for type Null")
 
@@ -60,6 +61,20 @@ Primitive& Primitive::operator=(const tfc::Primitive& other)
   value_ = other.value_->clone();
 
   return *this;
+}
+
+Primitive Primitive::makeFromString(const std::string& input)
+{
+  if (input.empty())
+    return Primitive();
+  else if (stringIsBoolean(input))
+    return Primitive(input == "true");
+  else if (stringIsInteger(input))
+    return Primitive(static_cast<int64_t>(stoll(input)));
+  else if (stringIsFloat(input))
+    return Primitive(std::stod(input));
+  else
+    return Primitive(input);
 }
 
 PrimitiveType Primitive::type() const { return value_->Type(); }
